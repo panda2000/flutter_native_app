@@ -7,8 +7,8 @@ class DBHelper {
     final dbpath = await sql.getDatabasesPath();
     return sql.openDatabase(
       path.join(dbpath, 'plase.db'),
-      onCreate: (db, version) {
-        return db.execute('CREATE TABLE user_places (id TEXT PRIMARY KEY, title TEXT, image TXT)');
+      onCreate: (db, version) {R
+        return db.execute('CREATE TABLE user_places (id TEXT PRIMARY KEY, title TEXT, image TXT, loc_lat REAL, loc_lng REAL)');
       },
       version: 1,
     );
@@ -24,4 +24,6 @@ class DBHelper {
     final db = await DBHelper.database();
     return db.query(table);
   }
+
+
 }

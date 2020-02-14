@@ -11,12 +11,12 @@ class GreatPlaces with ChangeNotifier {
     return [..._items];
   }
 
-  void addPlaces (String peakedTitle, File pickedImage,) {
+  void addPlaces (String peakedTitle, File pickedImage, PlaceLocation pickedLocation) {
     final newPlace  = Place (
         id: DateTime.now().toString(),
         image: pickedImage,
         title: peakedTitle,
-        location: null,
+        location: pickedLocation,
     );
 
     _items.add(newPlace);
@@ -28,6 +28,8 @@ class GreatPlaces with ChangeNotifier {
           'id': newPlace.id,
           'title': newPlace.title,
           'image': newPlace.image.path,
+          'loc_lat': newPlace.location.latitude,
+          'loc_lng': newPlace.location.longitude,
         }
     );
   }
@@ -38,7 +40,7 @@ class GreatPlaces with ChangeNotifier {
         id: item['id'],
       title: item['title'],
       image: File(item['image']),
-      location: null,
+      location: PlaceLocation(latitude: item['loc_lat'], longitude: item['loc_lng'], adress: item['adress']),
     )).toList();
   }
 }
