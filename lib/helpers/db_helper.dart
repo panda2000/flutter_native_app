@@ -2,12 +2,11 @@ import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart' as path;
 
 class DBHelper {
-
   static Future<sql.Database> database () async {
     final dbpath = await sql.getDatabasesPath();
     return sql.openDatabase(
       path.join(dbpath, 'plase.db'),
-      onCreate: (db, version) {R
+      onCreate: (db, version) {
         return db.execute('CREATE TABLE user_places (id TEXT PRIMARY KEY, title TEXT, image TXT, loc_lat REAL, loc_lng REAL)');
       },
       version: 1,
